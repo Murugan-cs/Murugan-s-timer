@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +9,16 @@
       background-color: #121212;
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
+      text-align: center;
     }
     h1 {
       margin-bottom: 20px;
@@ -29,6 +32,7 @@
       padding: 10px;
       font-size: 1.2rem;
       text-align: center;
+      margin: 5px;
     }
     button {
       padding: 10px 20px;
@@ -43,21 +47,34 @@
     button:hover {
       background-color: #333;
     }
+    #history {
+      margin-top: 20px;
+    }
+    .fullscreen {
+      width: 100vw;
+      height: 100vh;
+    }
   </style>
 </head>
 <body>
-  <h1>Murugan's Countdown Timer</h1>
-  <div>
-    <input type="number" id="minutes" placeholder="Minutes" min="0">
-    <input type="number" id="seconds" placeholder="Seconds" min="0">
+  <div class="container" id="main-container">
+    <h1>Murugan's Countdown Timer</h1>
+    <div>
+      <input type="number" id="minutes" placeholder="Minutes" min="0">
+      <input type="number" id="seconds" placeholder="Seconds" min="0">
+    </div>
+    <div id="timer">00:00</div>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="resetTimer()">Reset</button>
+    <button onclick="showHistory()">View Previous Timers</button>
+    <div id="history"></div>
+    <audio id="alarmSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" preload="auto"></audio>
   </div>
-  <div id="timer">00:00</div>
-  <button onclick="startTimer()">Start</button>
-  <button onclick="resetTimer()">Reset</button>
 
   <script>
     let countdown;
     let remainingTime = 0;
+    let timerHistory = [];
 
     function startTimer() {
       clearInterval(countdown);
@@ -65,12 +82,20 @@
       const seconds = parseInt(document.getElementById("seconds").value) || 0;
       remainingTime = minutes * 60 + seconds;
 
+      if (remainingTime <= 0) return;
+
+      const entry = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerHistory.push(entry);
       updateDisplay();
+
+      const container = document.getElementById("main-container");
+      container.classList.add("fullscreen");
 
       countdown = setInterval(() => {
         if (remainingTime <= 0) {
           clearInterval(countdown);
           document.getElementById("timer").innerText = "Time's up!";
+          document.getElementById("alarmSound").play();
         } else {
           remainingTime--;
           updateDisplay();
@@ -89,6 +114,12 @@
       document.getElementById("timer").innerText = "00:00";
       document.getElementById("minutes").value = '';
       document.getElementById("seconds").value = '';
+      document.getElementById("main-container").classList.remove("fullscreen");
+    }
+
+    function showHistory() {
+      const historyDiv = document.getElementById("history");
+      historyDiv.innerHTML = "<h3>Previous Timers:</h3>" + timerHistory.map(time => `<p>${time}</p>`).join('');
     }
   </script>
 </body>
