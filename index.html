@@ -4,7 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Murugan's Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: 24px;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    nav a:hover {
+      color: #00ffff;
+    }
+    section {
+      padding: 40px 20px;
+    }
+    #hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #222;
+    }
+    #hero h2 {
+      font-size: 36px;
+    }
+    #hero p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+    .project {
+      background: #1f1f1f;
+      padding: 15px;
+      margin: 10px 0;
+      border-left: 4px solid #00ffff;
+    }
+    a {
+      color: #00ffff;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1a1a1a;
+      font-size: 14px;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav a {
+        margin: 5px 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -43,10 +118,16 @@
       <h3>Murugan's Timer</h3>
       <p>A custom dark mode timer with fullscreen view and sound.</p>
     </div>
-    <!-- Add more projects here -->
   </section>
 
   <section id="contact">
     <h2>Contact Me</h2>
     <p>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
-    <p>Instagram: <a href="https://instagram.com/yourhandle" t
+    <p>Instagram: <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Murugan</p>
+  </footer>
+</body>
+</html>
